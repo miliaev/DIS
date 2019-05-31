@@ -14,7 +14,7 @@ CREATE TABLE node
 CREATE TABLE tag
 (
   id BIGSERIAL PRIMARY KEY,
-  node_id BIGINT REFERENCES node,
+  node BIGINT REFERENCES node(id),
   key TEXT,
   value TEXT
 );
