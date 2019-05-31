@@ -23,6 +23,10 @@ version '1.0'
 
 sourceCompatibility = 1.8
 
+compileJava {
+    options.compilerArgs << '-parameters'
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/snapshot' }

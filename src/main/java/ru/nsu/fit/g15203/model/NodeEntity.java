@@ -2,8 +2,8 @@ package ru.nsu.fit.g15203.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -33,17 +33,19 @@ public class NodeEntity extends BasePersistentEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "node", orphanRemoval = true)
+    @OneToMany(mappedBy = "node", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter(AccessLevel.NONE)
     private List<TagEntity> tags = new ArrayList<>();
 
     public NodeEntity addTag(TagEntity tag) {
+        tag.setNode(this);
         this.tags.add(tag);
         return this;
     }
 
-    public NodeEntity addAllTags(Set<TagEntity> tags) {
-        this.tags.addAll(tags);
+    public NodeEntity addAllTags(List<TagEntity> tags) {
+        this.tags.clear();
+        tags.forEach(this::addTag);
         return this;
     }
 }
