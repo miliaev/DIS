@@ -1,5 +1,7 @@
 package ru.nsu.fit.g15203.service;
 
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +35,9 @@ public class NodeService {
         node.setName(incoming.getName());
         node.addAllTags(incoming.getTags());
         return nodeRepository.save(node);
+    }
+
+    public List<NodeEntity> search(double latitude, double longitude, double radius) {
+        return nodeRepository.findByCoordinatesAndRadius(latitude, longitude, radius);
     }
 }
