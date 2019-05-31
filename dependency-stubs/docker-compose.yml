@@ -1,0 +1,10 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - '15800:5432'
+    environment:
+      POSTGRES_DB: nsu_db
+      POSTGRES_USER: nsu_db
+      POSTGRES_PASSWORD: nsu_db
